@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0">
+    <title>Empresas</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.0.0/css/all.min.css}" >
+    <script th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/popper/js/2.9.3/umd/popper.min.js}"></script>
+</head>
+<body>
+    <nav th:replace="layout/plantilla :: nav"></nav>
+    <div class="container-md">
+        <h2 class="text-center my-3">Nueva empresa</h2>
+        <form class="row g-3" th:action="@{/guardarEmpresa}" method="post" th:object="${empresa}">
+            <div class="col-12">
+                <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
+                <input type="text" class="form-control" name="nombreEmpresa" th:field="*{nombreEmpresa}" required="required">
+            </div>
+            <div class="col-12">
+                <label for="NIT" class="form-label">NIT</label>
+                <input type="number" class="form-control" name="NIT" th:field="*{NIT}" required="required">
+            </div>
+            <div class="col-12">
+                <label for="direccionEmpresa" class="form-label">Dirección</label>
+                <input type="text" class="form-control" name="direccionEmpresa" th:field="*{direccionEmpresa}" required="required">
+            </div>
+            <div class="col-12">
+                <label for="telefonoEmpresa" class="form-label">Telefono</label>
+                <input type="text" class="form-control" name="telefonoEmpresa" th:field="*{telefonoEmpresa}" required="required">
+            </div>
+            <div class="col-6">
+                <input type="submit" class="btn btn-primary" name="guardar" value="Guardar">
+            </div>
+            <div class="col-6">
+                <a class="btn btn-danger " role="button" th:href="@{/empresas/verEmpresas}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+<footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.0.0/css/all.min.css}" >
+    <script th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/popper/js/2.9.3/umd/popper.min.js}"></script>
+</head>
+<body>
+    <nav th:replace="layout/plantilla :: nav"></nav>
+    <div class="container">
+        <h2 class="text-center my-3">Nuevo Usuario</h2>
+
+        <form class="row g-3" th:action="@{/guardarUsuario}" method="post" th:object="${usuario}">
+            <div class="col-12">
+                <label for="nombreEmpleado" class="form-label">Nombre Completo</label>
+                <input type="text"  class="form-control" required="required" name="nombreEmpleado" th:field="*{nombreEmpleado}">
+            </div>
+            <div class="col-12">
+                <label for="documento" class="form-label">Documento</label>
+                <input type="numeric" inputmode="numeric"  class="form-control" required="required" name="documento" th:field="*{documento}">
+            </div>
+            <div class="col-6">
+                <label for="correoEmpleado"class="form-label">Correo Electrónico</label>
+                <input type="text"  class="form-control" required="required" name="correoEmpleado" th:field="*{correoEmpleado}" placeholder="name@example.com">
+            </div>
+
+            <div class="col-6">
+                <label for="username"class="form-label">username</label>
+                <input type="username"  class="form-control" required="required" name="username" th:field="*{username}">
+            </div>
+
+            <div class="col-6">
+                <label for="pass"class="form-label">Contraseña</label>
+                <input type="password"  class="form-control" required="required" name="pass" th:field="*{pass}">
+            </div>
+            <div class="col-12">
+                <label for="telefono"class="form-label">Telefono</label>
+                <input type="text"  class="form-control" required="required" name="telefono" th:field="*{telefono}">
+            </div>
+            <div class="col-6">
+                <label for="rol" class="form-label">Rol</label>
+                <select class="form-select" th:field = "*{rol}" name="rol" required="required">
+                    <option value="">Seleccione un rol</option>
+
+                    <option th:value='ROLE_ADMIN'>Administrativo</option>
+                    <option th:value='ROLE_USER'>Operativo</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="empresa" class="form-label">Empresa</label>
+                <select class="form-select" th:field = "*{empresa.id}" name="empresa" required="required">
+                    <option value="0">Seleccione empresa</option>
+                    <!--option value="0"  selected>Seleccione empresa</option-->
+                    <option th:each="empresa : ${empresas}"
+                            th:value="${empresa.id}"
+                            th:text="${empresa.nombreEmpresa}">
+
+                    </option>
+                </select>
+            </div>
+            <div class="col-6">
+                <input type="submit" class="btn btn-primary" name="guardar" value="Guardar">
+            </div>
+            <div class="col-6">
+                <a class="btn btn-danger" role="button" th:href="@{/usuarios/verUsuarios}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>
